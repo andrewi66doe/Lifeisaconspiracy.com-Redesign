@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block title %}Logged in as {{ session["user"] }}{% endblock %}
+{% block heading %}Logged in{% endblock %}
+{% block body %}
+<p>You are logged in as user {{ session["user"] }}</p>
+<a href = {{ url_for("logout") }}>Logout</a>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block title %}{{ session["user"] }}{% endblock %}
+{% block heading %}{{ name }}{% endblock %}
+{% block body %}
+<script type='text/javascript'>
+        function displayLoadingBar(){
+            var loadingBar = document.getElementById('loader');
+            loadingBar.style.display = '';
+        }
+        function changeTrack(song){
+            $('audio').attr('src', 'static/uploads/{{ session['user']}}/'+song);
+        };
+        function parse_songs(songs){
+            for (var i = 0; i < songs.length; i++) {
+                console.log(songs[i]);
+            }
+       }
+</script>
+
+
+<p>{{ name }} is {{ age }} years old</p>
+<div class='form-actions' >
+<audio id='music' class='text-center' controls="controls"  autoplay="autoplay" src=""></audio>
+<h3>Your stored music</h3>
+<div style="height:500px;width:700px;border:0px solid #ccc;font:18px Arial; overflow:auto;">
+<ul class="inline">
+{% for file in user_files %}
+    <a onclick="changeTrack('{{ file }}')" href="javascript:void(0);"><li>{{ file }}</li></a>
+{% endfor %}
+</ul>
+</div>
+</div>
+
+<form class="form-actions" action="{{ url_for("upload")}}" xmlns="http://www.w3.org/1999/html" method="POST" enctype='multipart/form-data'>
+      <p>Upload a file</p>
+      <input type='file' name='file[]' multiple=''>
+      <input onclick="displayLoadingBar()" class='btn' type='submit' value='Upload'>
+</form>
+<div id="loader" style="display:none">
+    <div id='siteDetailLoader'>
+        <img src='{{ url_for('static', filename='loading.gif') }}' border='0'>
+        Please wait while the songs uploads...<br /> <br />
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='bootstrap.css') }}">
+    <title>{% block title %}{% endblock %}</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+</head>
+
+
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+    <div class="container">
+
+    <a class="brand" href="{{ url_for("main") }}">LifeIsaConspiracy</a>
+    <div class="nav-collapse collapse">
+        <ul class="nav">
+            <li><a href="{{ url_for("info") }}">Info</a></li>
+            <li><a href="{{ url_for("home_page") }}">HomePage</a></li>
+            {% if not session['user'] %}
+            <li><a href="{{ url_for("register") }}">Register</a></li>
+            {% endif %}
+            </ul>
+        <ul class="nav pull-right">
+            {% if not session['user'] %}
+  		    <li>
+			    <a href='{{ url_for("login") }}'><i class='icon-user icon-white'></i> Sign in</a>
+		    </li>
+            {% endif %}
+            {% if session['user'] %}
+            <li>
+                <a href='{{ url_for('logout') }}'><i class='icon-user icon-white'></i>Sign out</a>
+            </li>
+            {% endif %}
+	    </ul>
+        </div>
+        </div>
+        </div>
+</div>
+<div class="container">
+
+<div class="hero-unit">
+<h1>{% block heading %}{% endblock %}</h1>
+{% block body%}{% endblock %}
+{% for message in get_flashed_messages() %}
+    <p>{{ message }}</p>
+{% endfor %}
+</div>
+</div>
+
+</body>
+
+
+
+
+</html>

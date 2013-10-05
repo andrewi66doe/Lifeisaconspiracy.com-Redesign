@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}Register{% endblock %}
+{% block heading %}Register{% endblock %}
+{% block body %}
+<p>Register here</p>
+    <form class="form-actions" xmlns="http://www.w3.org/1999/html" action="{{ url_for('register') }}" method="post">
+        <p>Username<label>
+            <input class="input-block-level" type="text" name="username">
+        </label></p>
+        <p>Password<input class="input-block-level" type="password" name="password"></p>
+        <p>Confirm Password<input class="input-block-level" type="password" name="confirm_password"></p>
+        <p>Name<input class="input-block-level" type="text" name="name"></p>
+        <p>Age<input class="input-block-level" type="number" name="age"></p>
+        <p>Email<input class="input-block-level" type="text" name="email"></p>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+{% endblock %}
